@@ -1,0 +1,334 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-09-01T06:09:41.505Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.7",
+    "resources": [
+        {
+            "_id": "req_26b2da658f8e4c0b9facc3ed3371e369",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693542986930,
+            "created": 1693525096297,
+            "url": "localhost:3000/contas?senha_banco=Cubos123Bank",
+            "name": "GetAll - Lista todas as contas ",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693525096297,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_20d3c4033b93472a899db8977e120e29",
+            "parentId": null,
+            "modified": 1693525092215,
+            "created": 1693525092215,
+            "name": "My Collection",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_3d106481df6d4bac8c260cc676219249",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693545755516,
+            "created": 1693545691063,
+            "url": "localhost:3000/contas/bb20d3f2-f22f-44cd-83f8-a40f875f27f1?senha_banco=Cubos123Bank",
+            "name": "Delete - Delete uma Conta Bancária",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693524042893,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_9a0dcb53097b4710ab1d03e6e9de3404",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693545785736,
+            "created": 1693530858996,
+            "url": "localhost:3000/contas?senha_banco=Cubos123Bank",
+            "name": "Post - Criação de conta bancária",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n            \"nome\": \"Jose\",\n            \"cpf\": \"777777777777\",\n            \"data_nascimento\": \"1994-03-15\",\n            \"telefone\": \"719999111111\",\n            \"email\": \"jose@almeida.com\",\n            \"senha\": \"12345\"\n        }"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693522989489,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_83f6bedf9fec48f29a35d0885d248079",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693545518668,
+            "created": 1693533584775,
+            "url": "localhost:3000/contas/447a56fb-5b8b-4955-ab19-a8c581ac4c09/usuario?senha_banco=Cubos123Bank",
+            "name": "PUT - Atualização de usuário de conta bancária",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n            \"nome\": \"Maxson Ferovante\",\n            \"cpf\": \"00011122234\",\n            \"data_nascimento\": \"1994-03-15\",\n            \"telefone\": \"0000000000000000\",\n            \"email\": \"maxson@ferovante.com\",\n            \"senha\": \"123476\"\n        }"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521936085,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_e5fe2a4f15a24036832ca7900bb6119a",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693547372269,
+            "created": 1693547215072,
+            "url": "localhost:3000/contas/saldo?numero_conta=447a56fb-5b8b-4955-ab19-a8c581ac4c09&senha=12345&senha_banco=Cubos123Bank",
+            "name": "GET - Saldo da Conta Bancária",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "",
+                "text": "{\n            \"nome\": \"Maxson Ferovante\",\n            \"cpf\": \"00011122234\",\n            \"data_nascimento\": \"1994-03-15\",\n            \"telefone\": \"0000000000000000\",\n            \"email\": \"maxson@ferovante.com\",\n            \"senha\": \"123476\"\n        }"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": ""
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521936035,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_89b40664ad284b19846935e1ab5f97af",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693547369018,
+            "created": 1693547355975,
+            "url": "localhost:3000/contas/extrato?numero_conta=447a56fb-5b8b-4955-ab19-a8c581ac4c09&senha=12345&senha_banco=Cubos123Bank",
+            "name": "GET -Extrato da Conta Bancária",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521936010,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_87b72c2db2cf423bb02d7161c6433c51",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693545821130,
+            "created": 1693535675462,
+            "url": "localhost:3000/transacoes/depositar?senha_banco=Cubos123Bank",
+            "name": "Post - Deposito em Conta Bancária",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n{\n\t\"numero_conta\": \"447a56fb-5b8b-4955-ab19-a8c581ac4c09\",\n\t\"valor\": 1900\n}  "
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521935985,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_6b99d5b0cc6e4c37862b56f5bde5d877",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693546545340,
+            "created": 1693546511620,
+            "url": "localhost:3000/transacoes/sacar?senha_banco=Cubos123Bank",
+            "name": "Post - Sacar de Conta Bancária",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n{\n\t\"numero_conta\": \"447a56fb-5b8b-4955-ab19-a8c581ac4c09\",\n\t\"valor\": 1900,\n\t\"senha\":\"12345\"\n}  "
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521409333,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_cf62a1a6209a497eb1740435a051b9d4",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693547155941,
+            "created": 1693546720546,
+            "url": "localhost:3000/transacoes/transferir?senha_banco=Cubos123Bank",
+            "name": "Post - Transferir entre Contas Bancária",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n{\n\t\"numero_conta_origem\": \"447a56fb-5b8b-4955-ab19-a8c581ac4c09\",\n\t\"numero_conta_destino\": \"bb20d3f2-f22f-44cd-83f8-a40f875f27f1\",\n\t\"valor\": 1900,\n\t\"senha\":\"12345\"\n}  "
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Insomnia/2023.5.7"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1693521146007,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_53f4cc0cc44dad286cab137390e35f3c2a91b87f",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693525092219,
+            "created": 1693525092219,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1693525092219,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_53f4cc0cc44dad286cab137390e35f3c2a91b87f",
+            "parentId": "wrk_20d3c4033b93472a899db8977e120e29",
+            "modified": 1693525092220,
+            "created": 1693525092220,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}

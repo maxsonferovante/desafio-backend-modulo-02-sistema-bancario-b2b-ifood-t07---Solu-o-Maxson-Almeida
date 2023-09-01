@@ -1,0 +1,34 @@
+{
+  "name": "desafio-backend-modulo-02-sistema-bancario-b2b-ifood-t07",
+  "version": "1.0.0",
+  "description": "Esta é uma API para um banco digital que permite a gestão de contas bancárias, depósitos, saques, transferências e consulta de saldo.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxsonferovante/desafio-backend-modulo-02-sistema-bancario-b2b-ifood-t07.git"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "api",
+    "rest"
+  ],
+  "author": "Maxson Almeida",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxsonferovante/desafio-backend-modulo-02-sistema-bancario-b2b-ifood-t07/issues"
+  },
+  "homepage": "https://github.com/maxsonferovante/desafio-backend-modulo-02-sistema-bancario-b2b-ifood-t07#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuidv4": "^6.2.13",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
