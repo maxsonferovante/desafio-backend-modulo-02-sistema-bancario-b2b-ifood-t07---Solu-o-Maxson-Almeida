@@ -62,7 +62,7 @@ Realiza um depósito em uma conta bancária. Forneça o número da conta e o val
 ```json
 {
 	"numero_conta": "Número da Conta",
-	"valor": Valor do Depósito
+	"valor": 1900
 }
 ```
 
@@ -75,7 +75,7 @@ Permite sacar dinheiro de uma conta bancária. Fornecer o número da conta, o va
 ```json
 {
 	"numero_conta": "Número da Conta",
-	"valor": Valor do Saque,
+	"valor": 1900,
     "senha": "Senha da Conta"
 }
 ```
@@ -90,7 +90,7 @@ Realiza uma transferência entre duas contas bancárias. Fornecer o número da c
 {
 	"numero_conta_origem": "Número da Conta de Origem",
 	"numero_conta_destino": "Número da Conta de Destino",
-	"valor": Valor da Transferência,
+	"valor": 1900,
 	"senha": "Senha da Conta de Origem"
 }
 ```
@@ -148,6 +148,9 @@ Retorna o extrato das transações realizadas em uma conta bancária. Fornecer o
 3. Instale as dependências com `npm install`.
 4. Inicie o servidor local com `npm run dev`.
 5. Acesse os endpoints da API usando ferramentas como Postman ou curl. Indico o Insominia, uma vez que disponibilizo um arquivo com os endpoints para exportação e testes.
+
+** Arquivo para exportação - Insominia**
+![Insomnia.json](Insomnia_2023-09-01.json)
 
 Lembre-se de substituir os valores entre chaves (`{}`) pelos valores reais ao fazer as requisições.
 
