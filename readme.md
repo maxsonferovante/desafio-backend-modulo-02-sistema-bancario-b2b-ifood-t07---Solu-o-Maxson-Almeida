@@ -148,7 +148,7 @@ Retorna o extrato das transações realizadas em uma conta bancária. Fornecer o
 4. Inicie o servidor local com `npm run dev`.
 5. Acesse os endpoints da API usando ferramentas como Postman ou curl. Indico o Insominia, uma vez que disponibilizo um arquivo com os endpoints para exportação e testes.
 
-** Arquivo para exportação - Insominia**
+**Arquivo para exportação - Insominia**
 [Insomnia.json](Insomnia_2023-09-01.json)
 
 Lembre-se de substituir os valores entre chaves (`{}`) pelos valores reais ao fazer as requisições.
