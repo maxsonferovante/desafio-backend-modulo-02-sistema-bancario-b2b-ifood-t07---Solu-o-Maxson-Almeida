@@ -108,7 +108,6 @@ Consulta o saldo de uma conta bancária. É necessário fornecer o número da co
 Retorna o extrato das transações realizadas em uma conta bancária. Fornecer o número da conta e a senha da conta como query parameters.
 
 ```json
-// HTTP Status 200 / 201 / 204
 {
   "depositos": [
     {
@@ -150,7 +149,7 @@ Retorna o extrato das transações realizadas em uma conta bancária. Fornecer o
 5. Acesse os endpoints da API usando ferramentas como Postman ou curl. Indico o Insominia, uma vez que disponibilizo um arquivo com os endpoints para exportação e testes.
 
 ** Arquivo para exportação - Insominia**
-![Insomnia.json](Insomnia_2023-09-01.json)
+[Insomnia.json](Insomnia_2023-09-01.json)
 
 Lembre-se de substituir os valores entre chaves (`{}`) pelos valores reais ao fazer as requisições.
 
