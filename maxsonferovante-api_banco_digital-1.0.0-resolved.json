@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Banco Digital - Desafio Módulo 2 - Back-end Cubos Academy",
+    "description": "API de Banco Digital - Desafio Módulo 2 - Back-end Cubos Academy. API para gerenciar contas bancárias",
+    "contact": {
+      "email": "maxsonferovante@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/maxsonferovante/api_banco_digital/1.0.0",
+      "description": "API para gerenciar contas bancárias"
+    }
+  ],
+  "paths": {
+    "/contas": {
+      "get": {
+        "summary": "Listar Contas Bancárias",
+        "description": "Lista todas as contas bancárias existentes.",
+        "parameters": [
+          {
+            "name": "senha_banco",
+            "in": "query",
+            "description": "Senha do banco para acessar a lista.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de contas bancárias.",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "numero_conta": "123456789",
+                    "nome": "João Silva",
+                    "saldo": 5000
+                  },
+                  {
+                    "numero_conta": "987654321",
+                    "nome": "Maria Souza",
+                    "saldo": 8000
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar Conta Bancária",
+        "description": "Cria uma nova conta bancária.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaBancaria"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Conta bancária criada com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/contas/{numeroConta}/usuario": {
+      "put": {
+        "summary": "Atualizar Usuário da Conta Bancária",
+        "description": "Atualiza os dados do usuário de uma conta bancária.",
+        "parameters": [
+          {
+            "name": "numeroConta",
+            "in": "path",
+            "description": "Número da conta bancária.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/Usuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do usuário atualizados com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/contas/{numeroConta}": {
+      "delete": {
+        "summary": "Excluir Conta Bancária",
+        "description": "Exclui uma conta bancária se o saldo for zero.",
+        "parameters": [
+          {
+            "name": "numeroConta",
+            "in": "path",
+            "description": "Número da conta bancária.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Conta bancária excluída com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          },
+          "409": {
+            "description": "A conta não pode ser excluída devido ao saldo não ser zero."
+          }
+        }
+      }
+    },
+    "/transacoes/depositar": {
+      "post": {
+        "summary": "Depositar",
+        "description": "Realiza um depósito em uma conta bancária.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransacaoDeposito"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Depósito realizado com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/transacoes/sacar": {
+      "post": {
+        "summary": "Sacar",
+        "description": "Permite sacar dinheiro de uma conta bancária.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransacaoSaque"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Saque realizado com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/transacoes/transferir": {
+      "post": {
+        "summary": "Transferir",
+        "description": "Realiza uma transferência entre duas contas bancárias.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransacaoTransferencia"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Transferência realizada com sucesso."
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/contas/saldo": {
+      "get": {
+        "summary": "Saldo",
+        "description": "Consulta o saldo de uma conta bancária.",
+        "parameters": [
+          {
+            "name": "numero_conta",
+            "in": "query",
+            "description": "Número da conta bancária.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "senha",
+            "in": "query",
+            "description": "Senha da conta.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Saldo consultado com sucesso.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "saldo": 5000
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de entrada inválida."
+          }
+        }
+      }
+    },
+    "/contas/extrato": {
+      "get": {
+        "summary": "Extrato",
+        "description": "Retorna o extrato das transações realizadas em uma conta bancária.",
+        "parameters": [
+          {
+            "name": "numero_conta",
+            "in": "query",
+            "description": "Número da conta bancária.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "senha",
+            "in": "query",
+            "description": "Senha da conta.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Extrato retornado com sucesso.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "depositos": [
+                    {
+                      "data": "2023-09-01 06:02:27",
+                      "valor": 1900
+                    },
+                    {
+                      "data": "2023-09-01 06:02:27",
+                      "valor": 1900
+                    }
+                  ],
+                  "saques": [
+                    {
+                      "data": "2023-09-01 06:02:31",
+                      "valor": 1900
+                    }
+                  ],
+                  "transferenciasEnviadas": [
+                    {
+                      "data": "2023-09-01 06:02:29",
+                      "numero_conta_destino": "bb20d3f2-f22f-44cd-83f8-a40f875f27f1",
+                      "valor": 1900
+                    }
+                  ],
+                  "transferenciasRecebidas": []
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContaBancaria": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "data_nascimento": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "data_nascimento": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        }
+      },
+      "TransacaoDeposito": {
+        "type": "object",
+        "properties": {
+          "numero_conta": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          }
+        }
+      },
+      "TransacaoSaque": {
+        "type": "object",
+        "properties": {
+          "numero_conta": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "senha": {
+            "type": "string"
+          }
+        }
+      },
+      "TransacaoTransferencia": {
+        "type": "object",
+        "properties": {
+          "numero_conta_origem": {
+            "type": "string"
+          },
+          "numero_conta_destino": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "senha": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
