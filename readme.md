@@ -5,7 +5,7 @@ Bem-vindo à API de Banco Digital! Esta é uma aplicação piloto de um banco di
 
 ## Documentação da API - Swagger
 
-<iframe width="100%" height="500" src="https://app.swaggerhub.com/apis-docs/maxsonferovante/api_banco_digital/1.0.0#/"></iframe>
+A documentação da API está disponível [aqui](https://app.swaggerhub.com/apis-docs/maxsonferovante/api_banco_digital/1.0.0#/).
 
 ## Como Usar
 
