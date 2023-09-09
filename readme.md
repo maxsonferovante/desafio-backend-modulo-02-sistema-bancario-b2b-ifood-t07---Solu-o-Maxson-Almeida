@@ -7,6 +7,8 @@ Bem-vindo à API de Banco Digital! Esta é uma aplicação piloto de um banco di
 
 A documentação da API está disponível [aqui](https://app.swaggerhub.com/apis-docs/maxsonferovante/api_banco_digital/1.0.0#/).
 
+![Endpoints](rotas.png)
+
 ## Como Usar
 
 1. Faça o fork deste repositório para o seu próprio GitHub.
