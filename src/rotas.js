@@ -1,62 +1,94 @@
 const { Router } = require('express');
 
-const contaBancaria = require('./controladores/contaBancaria');
 const transacoesBancarias = require('./controladores/transacoesBancarias');
-const intermediarios = require('./intermediarios');
+const contaBancaria = require('./controladores/contaBancaria');
+
+const { verificarCredenciasDoBanco,
+    validarListagemDeContas
+} = require('./intermediarios/bancoIntermermediario');
+
+const {
+    validarCamposNecessariosParaCriarConta,
+    validarCamposNecessariosParaAtualizarConta,
+    validarCamposNecessariosParaDeletarConta,
+    verificarExistenciaDaConta,
+    cpfEEmailUnicos,
+    cpfUnico,
+    emailUnico
+} = require('./intermediarios/contaBancariaIntermediario');
+
+const {
+    validarCamposNecessariosParaDepositar,
+    validarCamposNecessariosParaSacar,
+    validarCamposNecessariosParaTransferir,
+    validarCamposNecessariosParaConsultarSaldo,
+    validarCamposNecessariosParaEmitirExtrato,
+    verificarExistenciaDaContaParaConsultarSaldo,
+    validarCredenciaisParaConsultarSaldo,
+    validarCredenciaisParaSacar,
+    verificarExistenciaDaContaParaSacar,
+    validarCredenciaisParaTransferir,
+    verificarExistenciaDaContaParaTransferir,
+    verificarExistenciaDaContaParaDepositar,
+    saldoZerado,
+    saldoSuficienteParaSaque,
+    validarCredenciaisParaEmitirExtrato,
+    verificarExistenciaDaContaParaEmitirExtrato
+} = require('./intermediarios/transacoesBancariasIntermerdiario');
 
 const rotas = Router();
 
-rotas.get('/contas', contaBancaria.listarContas);
+rotas.get('/contas',
+    validarListagemDeContas,
+    verificarCredenciasDoBanco,
+    contaBancaria.listarContas);
 
 rotas.post('/contas',
-    intermediarios.todosOsCamposPreenchidosConta,
-    intermediarios.cpfEEmailUnicos,
+    validarCamposNecessariosParaCriarConta,
+    cpfEEmailUnicos,
     contaBancaria.criarConta);
 
 rotas.put('/contas/:numeroConta/usuario',
-    intermediarios.contaExiste,
-    intermediarios.todosOsCamposPreenchidosConta,
-    intermediarios.cpfUnico,
-    intermediarios.emailUnico,
+    verificarExistenciaDaConta,
+    validarCamposNecessariosParaAtualizarConta,
+    cpfUnico,
+    emailUnico,
     contaBancaria.atualizarUsuario);
 
 rotas.delete('/contas/:numeroConta',
-    intermediarios.contaExiste,
-    intermediarios.saldoZerado,
+    verificarExistenciaDaConta,
+    saldoZerado,
     contaBancaria.excluirConta);
 
 rotas.post('/transacoes/depositar',
-    intermediarios.todosOsDadosParaPreenchidosTransacoes,
-    intermediarios.contaExiste,
-    intermediarios.valorPositivo,
+    validarCamposNecessariosParaDepositar,
+    verificarExistenciaDaContaParaDepositar,
     transacoesBancarias.depositar);
 
 rotas.post('/transacoes/sacar',
-    intermediarios.todosOsDadosParaPreenchidosTransacoes,
-    intermediarios.contaExiste,
-    intermediarios.senhaCorretaDaConta,
-    intermediarios.valorPositivo,
-    intermediarios.saldoSuficienteParaSaque,
+    validarCamposNecessariosParaSacar,
+    verificarExistenciaDaContaParaSacar,
+    validarCredenciaisParaSacar,
+    saldoSuficienteParaSaque,
     transacoesBancarias.sacar);
 
 rotas.post('/transacoes/transferir',
-    intermediarios.todosOsDadosParaPreenchidosTransacoes,
-    intermediarios.contasExistemParaTransferencia,
-    intermediarios.senhaCorretaDaConta,
-    intermediarios.valorPositivo,
-    intermediarios.saldoSuficienteParaSaque,
+    validarCamposNecessariosParaTransferir,
+    verificarExistenciaDaContaParaTransferir,
+    validarCredenciaisParaTransferir,
+    saldoSuficienteParaSaque,
     transacoesBancarias.transferir);
 
 rotas.get('/contas/saldo',
-    intermediarios.todosOsDadosParaPreenchidosTransacoes,
-    intermediarios.contaExiste,
-    intermediarios.senhaCorretaDaConta,
+    validarCamposNecessariosParaConsultarSaldo,
+    verificarExistenciaDaContaParaConsultarSaldo,
+    validarCredenciaisParaConsultarSaldo,
     transacoesBancarias.consultarSaldo);
 
 rotas.get('/contas/extrato',
-    intermediarios.todosOsDadosParaPreenchidosTransacoes,
-    intermediarios.contaExiste,
-    intermediarios.senhaCorretaDaConta,
+    validarCamposNecessariosParaEmitirExtrato,
+    verificarExistenciaDaContaParaEmitirExtrato,
+    validarCredenciaisParaEmitirExtrato,
     transacoesBancarias.emitirExtrato);
 
 module.exports = rotas;

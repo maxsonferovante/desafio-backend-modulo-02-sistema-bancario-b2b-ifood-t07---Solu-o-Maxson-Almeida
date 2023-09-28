@@ -9,7 +9,7 @@ it('should successfully deposit a positive value to an existing account', () => 
     // Set up
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 100
         }
     };
@@ -38,7 +38,7 @@ it('should successfully deposit money into an existing account', () => {
     // Arrange
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 100
         }
     };
@@ -70,7 +70,7 @@ it('should return a 204 status code and update the account balance when depositi
     // Arrange
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 0
         }
     };
@@ -85,7 +85,7 @@ it('should return a 204 status code and update the account balance when depositi
     };
     const expectedDeposit = {
         data: dataParaRegistroDeTransacoes(),
-        numero_conta: '123456',
+        numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
         valor: 0
     };
 
@@ -105,7 +105,7 @@ it('should increase the balance of an existing account by the deposited value', 
     // Arrange
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 1
         }
     };
@@ -120,7 +120,7 @@ it('should increase the balance of an existing account by the deposited value', 
     };
     const expectedDeposit = {
         data: expect.any(String),
-        numero_conta: '123456',
+        numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
         valor: 1
     };
 
@@ -140,7 +140,7 @@ it('should increase the balance of an existing account by the specified value wh
     // Arrange
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 1
         }
     };
@@ -247,7 +247,7 @@ it('should throw an error and return a 400 status code when depositing a value o
 it('should throw an error when depositing a value of Infinity into an existing account', () => {
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: Infinity
         }
     };
@@ -346,7 +346,7 @@ it('should send a success response with status code 204', () => {
     // Mock request and response objects
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 100
         }
     };
@@ -468,7 +468,7 @@ it('should process withdrawal transaction successfully and send a response with 
     // Mock request and response objects
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 100
         }
     };
@@ -495,7 +495,7 @@ it('should process withdrawal transaction successfully and send a response with 
     expect(saques.length).toBe(1);
     expect(saques[0]).toEqual({
         data: '2022-01-01 10:00:00',
-        numero_conta: '123456',
+        numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
         valor: 100
     });
     expect(res.status).toHaveBeenCalledWith(204);
@@ -539,7 +539,7 @@ it('should send a response with status code 400 and an error message when the ac
     // Arrange
     const req = {
         body: {
-            numero_conta: '123456',
+            numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1',
             valor: 100
         }
     };
@@ -1019,11 +1019,11 @@ it('should return status code 400 and an error message when an error occurs duri
 
     // Mocking the behavior of the 'depositos', 'saques', and 'transferencias' arrays
     const depositos = [
-        { numero_conta: '123456', valor: 100 },
+        { numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1', valor: 100 },
         { numero_conta: '789012', valor: 200 }
     ];
     const saques = [
-        { numero_conta: '123456', valor: 50 },
+        { numero_conta: 'bb20d3f2-f22f-44cd-83f8-a40f875f27f1', valor: 50 },
         { numero_conta: '789012', valor: 100 }
     ];
     const transferencias = [

@@ -7,7 +7,7 @@ module.exports = {
     },
     contas: [{
         "numero": "bb20d3f2-f22f-44cd-83f8-a40f875f27f1",
-        "saldo": 0,
+        "saldo": 1000000,
         "usuario": {
             "nome": "Maxson Almeida",
             "cpf": "00011122234",
