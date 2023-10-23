@@ -1,126 +1,28 @@
-![](https://i.imgur.com/xG74tOh.png)
+# API do Cubos Bank
 
-# Desafio Módulo 2 - Back-end
+## Descrição
 
-## Como entregar?
-
-- [ ] Faça o fork desse repositório para o seu GitHub
-- [ ] Clone o seu repositório em sua máquina
-- [ ] Desenvolva seu projeto, fazendo commits a cada alteração e push
-- [ ] Crie um PR (pull request)
-- [ ] Envie o link do pull request que você criou na plataforma da Cubos
-
-### ⚠️ Importante: Se o pull request não for criado e enviado na plataforma o feedback não será fornecido e constará como não entregue
-
-## Descrição do desafio
-
-Você acabou de ser contratado pela melhor empresa de tecnologia do mundo: a **CUBOS**.
-Sua primeira tarefa como desenvolvedor é criar uma API para um Banco Digital. Esse será um projeto **piloto**, ou seja, no futuro outras funcionalidades serão implementadas, portanto, dados do banco (nome, agência, etc.) serão imutáveis.
-
-Seu papel é construir uma RESTful API que permita:
-
--   Criar conta bancária
--   Listar contas bancárias
--   Atualizar os dados do usuário da conta bancária
--   Excluir uma conta bancária
--   Depósitar em uma conta bancária
--   Sacar de uma conta bancária
--   Transferir valores entre contas bancárias
--   Consultar saldo da conta bancária
--   Emitir extrato bancário
-
-**Importante: Sempre que a validação de uma requisição falhar, responda com código de erro e mensagem adequada à situação, ok?**
-
-**Exemplo:**
-
-```javascript
-// Quando é informado um número de conta que não existe:
-// HTTP Status 404
-{
-    "mensagem": "Conta bancária não encontada!"
-}
-```
-
-## Persistências dos dados
-
-Os dados serão persistidos em memória, no objeto existente dentro do arquivo `bancodedados.js`. **Todas as transações e contas bancárias deverão ser inseridas dentro deste objeto, seguindo a estrutura que já existe.**
-
-### Estrutura do objeto no arquivo `bancodedados.js`
-
-```javascript
-{
-    banco: {
-        nome: "Cubos Bank",
-        numero: "123",
-        agencia: "0001",
-        senha: "Cubos123Bank",
-    },
-    contas: [
-        // array de contas bancárias
-    ],
-    saques: [
-        // array de saques
-    ],
-    depositos: [
-        // array de depósitos
-    ],
-    transferencias: [
-        // array de transferências
-    ],
-}
-```
-## Requisitos obrigatórios
-
--   Sua API deve seguir o padrão REST
--   Seu código deve estar organizado, delimitando as responsabilidades de cada arquivo adequadamente. Ou seja, é esperado que ele tenha, no mínimo:
-    -   Um arquivo index.js
-    -   Um arquivo de rotas
-    -   Um pasta com controladores
--   Qualquer valor (dinheiro) deverá ser representado em centavos (Ex.: R$ 10,00 reais = 1000)
--   Evite códigos duplicados. Antes de copiar e colar, pense se não faz sentido esse pedaço de código estar centralizado numa função.
-
-## Status Code
-
-Abaixo, listamos os possíveis ***status code*** esperados como resposta da API.
-
-Obs.: A lista abaixo é para consulta, **não** significa que todos os ***status codes*** precisam necessariamente ser utilizados.
-
-```javascript
-// 200 (OK) = requisição bem sucedida
-// 201 (Created) = requisição bem sucedida e algo foi criado
-// 204 (No Content) = requisição bem sucedida, sem conteúdo no corpo da resposta
-// 400 (Bad Request) = o servidor não entendeu a requisição pois está com uma sintaxe/formato inválido
-// 401 (Unauthorized) = o usuário não está autenticado (logado)
-// 403 (Forbidden) = o usuário não tem permissão de acessar o recurso solicitado
-// 404 (Not Found) = o servidor não pode encontrar o recurso solicitado
-// 500 (Internal Server Error) = falhas causadas pelo servidor
-```
+A API do Cubos Bank é uma aplicação RESTful que permite a gestão de contas bancárias e transações financeiras. Com esta API, você pode criar, listar, atualizar, excluir contas bancárias, bem como realizar depósitos, saques, transferências, consultar saldo e emitir extratos.
 
 ## Endpoints
 
-### Listar contas bancárias
+### Listar Contas Bancárias
 
-#### `GET` `/contas?senha_banco=Cubos123Bank`
+- **Método:** GET
+- **URL:** `/contas`
+- **Parâmetros de Consulta:** `senha_banco` (Senha do banco)
 
-Esse endpoint deverá listar todas as contas bancárias existentes.
+Este endpoint permite listar todas as contas bancárias existentes.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se a senha do banco foi informada (passado como query params na url)
-    -   Validar se a senha do banco está correta
+```
+GET /contas?senha_banco=Cubos123Bank
+```
 
--   **Requisição** - query params (respeitando este nome)
+**Exemplo de Resposta:**
 
-    -   senha_banco
-
--   **Resposta**
-    -   listagem de todas as contas bancárias existentes
-
-#### Exemplo de resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
-// 2 contas encontradas
+```json
 [
     {
         "numero": "1",
@@ -147,49 +49,20 @@ Esse endpoint deverá listar todas as contas bancárias existentes.
         }
     }
 ]
-
-// nenhuma conta encontrada
-[]
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "A senha do banco informada é inválida!"
-}
 ```
 
-### Criar conta bancária
+### Criar Conta Bancária
 
-#### `POST` `/contas`
+- **Método:** POST
+- **URL:** `/contas`
 
-Esse endpoint deverá criar uma conta bancária, onde será gerado um número único para identificação da conta (número da conta).
+Este endpoint permite criar uma nova conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Criar uma nova conta cujo número é único
-    -   CPF deve ser um campo único.
-    -   E-mail deve ser um campo único.
-    -   Verificar se todos os campos foram informados (todos são obrigatórios)
-    -   Definir o saldo inicial da conta como 0
+```json
+POST /contas
 
--   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
-
-    -   nome
-    -   cpf
-    -   data_nascimento
-    -   telefone
-    -   email
-    -   senha
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Requisição
-
-```javascript
-// POST /contas
 {
     "nome": "Foo Bar 2",
     "cpf": "00011122234",
@@ -200,50 +73,18 @@ Esse endpoint deverá criar uma conta bancária, onde será gerado um número ú
 }
 ```
 
-#### Exemplo de Resposta
+### Atualizar Dados do Usuário
 
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "Já existe uma conta com o cpf ou e-mail informado!"
-}
-```
+- **Método:** PUT
+- **URL:** `/contas/:numeroConta/usuario`
 
-### Atualizar usuário da conta bancária
+Este endpoint permite atualizar os dados do usuário de uma conta bancária.
 
-#### `PUT` `/contas/:numeroConta/usuario`
+**Exemplo de Requisição:**
 
-Esse endpoint deverá atualizar apenas os dados do usuário de uma conta bancária.
+```json
+PUT /contas/1/usuario
 
--   Você deverá, **OBRIGATORIAMENTE**:
-
-    -   Verificar se foi passado todos os campos no body da requisição
-    -   Verificar se o numero da conta passado como parametro na URL é válida
-    -   Se o CPF for informado, verificar se já existe outro registro com o mesmo CPF
-    -   Se o E-mail for informado, verificar se já existe outro registro com o mesmo E-mail
-    -   Atualizar os dados do usuário de uma conta bancária
-
--   **Requisição** - O corpo (body) deverá possuir um objeto com todas as seguintes propriedades (respeitando estes nomes):
-
-    -   nome
-    -   cpf
-    -   data_nascimento
-    -   telefone
-    -   email
-    -   senha
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Requisição
-```javascript
-// PUT /contas/:numeroConta/usuario
 {
     "nome": "Foo Bar 3",
     "cpf": "99911122234",
@@ -251,292 +92,118 @@ Esse endpoint deverá atualizar apenas os dados do usuário de uma conta bancár
     "telefone": "71999998888",
     "email": "foo@bar3.com",
     "senha": "12345"
-{
-```
-
-
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "O CPF informado já existe cadastrado!"
 }
 ```
 
 ### Excluir Conta
 
-#### `DELETE` `/contas/:numeroConta`
+- **Método:** DELETE
+- **URL:** `/contas/:numeroConta`
 
-Esse endpoint deve excluir uma conta bancária existente.
+Este endpoint permite excluir uma conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se o numero da conta passado como parametro na URL é válido
-    -   Permitir excluir uma conta bancária apenas se o saldo for 0 (zero)
-    -   Remover a conta do objeto de persistência de dados.
-
--   **Requisição**
-
-    -   Numero da conta bancária (passado como parâmetro na rota)
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
 ```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "A conta só pode ser removida se o saldo for zero!"
-}
+DELETE /contas/1
 ```
 
 ### Depositar
 
-#### `POST` `/transacoes/depositar`
+- **Método:** POST
+- **URL:** `/transacoes/depositar`
 
-Esse endpoint deverá somar o valor do depósito ao saldo de uma conta válida e registrar essa transação.
+Este endpoint permite realizar um depósito em uma conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se o numero da conta e o valor do deposito foram informados no body
-    -   Verificar se a conta bancária informada existe
-    -   Não permitir depósitos com valores negativos ou zerados
-    -   Somar o valor de depósito ao saldo da conta encontrada
+```json
+POST /transacoes/depositar
 
--   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
-
-    -   numero_conta
-    -   valor
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/depositar
 {
-	"numero_conta": "1",
-	"valor": 1900
-}
-```
-
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "O número da conta e o valor são obrigatórios!"
-}
-```
-
-#### Exemplo do registro de um depósito
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
     "numero_conta": "1",
-    "valor": 10000
+    "valor": 1900
 }
 ```
 
 ### Sacar
 
-#### `POST` `/transacoes/sacar`
+- **Método:** POST
+- **URL:** `/transacoes/sacar`
 
-Esse endpoint deverá realizar o saque de um valor em uma determinada conta bancária e registrar essa transação.
+Este endpoint permite realizar um saque em uma conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se o numero da conta, o valor do saque e a senha foram informados no body
-    -   Verificar se a conta bancária informada existe
-    -   Verificar se a senha informada é uma senha válida para a conta informada
-    -   Verificar se há saldo disponível para saque
-    -   Subtrair o valor sacado do saldo da conta encontrada
+```json
+POST /transacoes/sacar
 
--   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
-
-    -   numero_conta
-    -   valor
-    -   senha
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/sacar
 {
-	"numero_conta": "1",
-	"valor": 1900,
+    "numero_conta": "1",
+    "valor": 1900,
     "senha": "123456"
 }
 ```
-#### Exemplo de Resposta
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
+
+### Transferir
+
+- **Método:** POST
+- **URL:** `/transacoes/transferir`
+
+Este endpoint permite realizar uma transferência entre contas bancárias.
+
+**Exemplo de Requisição:**
+
+```json
+POST /transacoes/transferir
+
 {
-    "mensagem": "O valor não pode ser menor que zero!"
-}
-```
-
-#### Exemplo do registro de um saque
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
-    "numero_conta": "1",
-    "valor": 10000
-}
-```
-
-### Tranferir
-
-#### `POST` `/transacoes/transferir`
-
-Esse endpoint deverá permitir a transferência de recursos (dinheiro) de uma conta bancária para outra e registrar essa transação.
-
--   Você deverá, **OBRIGATORIAMENTE**:
-
-    -   Verificar se o número da conta de origem, de destino, senha da conta de origem e valor da transferência foram informados no body
-    -   Verificar se a conta bancária de origem informada existe
-    -   Verificar se a conta bancária de destino informada existe
-    -   Verificar se a senha informada é uma senha válida para a conta de origem informada
-    -   Verificar se há saldo disponível na conta de origem para a transferência
-    -   Subtrair o valor da transfência do saldo na conta de origem
-    -   Somar o valor da transferência no saldo da conta de destino
-
--   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
-
-    -   numero_conta_origem
-    -   numero_conta_destino
-    -   valor
-    -   senha
-
--   **Resposta**
-
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
-
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/transferir
-{
-	"numero_conta_origem": "1",
-	"numero_conta_destino": "2",
-	"valor": 200,
-	"senha": "123456"
-}
-```
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
-// Sem conteúdo no corpo (body) da resposta
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "Saldo insuficiente!"
-}
-```
-
-#### Exemplo do registro de uma transferência
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
     "numero_conta_origem": "1",
     "numero_conta_destino": "2",
-    "valor": 10000
+    "valor": 200,
+    "senha": "123456"
 }
 ```
 
 ### Saldo
 
-#### `GET` `/contas/saldo?numero_conta=123&senha=123`
+- **Método:** GET
+- **URL:** `/contas/saldo`
+- **Parâmetros de Consulta:** `numero_conta` (Número da conta), `senha` (Senha da conta)
 
-Esse endpoint deverá retornar o saldo de uma conta bancária.
+Este endpoint permite consultar o saldo de uma conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se o numero da conta e a senha foram informadas (passado como query params na url)
-    -   Verificar se a conta bancária informada existe
-    -   Verificar se a senha informada é uma senha válida
-    -   Exibir o saldo da conta bancária em questão
+```
+GET /contas/saldo?numero_conta=1&senha=123456
+```
 
--   **Requisição** - query params
+**Exemplo de Resposta:**
 
-    -   numero_conta
-    -   senha
-
--   **Resposta**
-
-    -   Saldo da conta
-
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
+```json
 {
     "saldo": 13000
-}
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "Conta bancária não encontada!"
 }
 ```
 
 ### Extrato
 
-#### `GET` `/contas/extrato?numero_conta=123&senha=123`
+- **Método:** GET
+- **URL:** `/contas/extrato`
+- **Parâmetros de Consulta:** `numero_conta` (Número da conta), `senha` (Senha da conta)
 
-Esse endpoint deverá listar as transações realizadas de uma conta específica.
+Este endpoint permite emitir o extrato de transações de uma conta bancária.
 
--   Você deverá, **OBRIGATORIAMENTE**:
+**Exemplo de Requisição:**
 
-    -   Verificar se o numero da conta e a senha foram informadas (passado como query params na url)
-    -   Verificar se a conta bancária informada existe
-    -   Verificar se a senha informada é uma senha válida
-    -   Retornar a lista de transferências, depósitos e saques da conta em questão.
+```
+GET /contas/extrato?numero_conta=1&senha=123456
+```
 
--   **Requisição** - query params
+**Exemplo de Resposta:**
 
-    -   numero_conta
-    -   senha
-
--   **Resposta**
-    -   Relatório da conta
-
-#### Exemplo de Resposta
-
-```javascript
-// HTTP Status 200 / 201 / 204
+```json
 {
   "depositos": [
     {
@@ -578,17 +245,13 @@ Esse endpoint deverá listar as transações realizadas de uma conta específica
       "numero_conta_destino": "1",
       "valor": 2000
     }
-  ]
+  }
 }
 ```
 
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "Conta bancária não encontada!"
-}
-```
+## Status Codes
 
-**LEMBRE-SE**: Feito é melhor do que perfeito, mas não faça mal feito!!!
-
-###### tags: `back-end` `módulo 2` `nodeJS` `API REST` `desafio`
+- 200 (OK): Requisição bem sucedida.
+- 201 (Created): Requisição bem sucedida e algo foi criado.
+- 204 (No Content): Requisição bem sucedida, sem conteúdo no corpo da resposta.
+- 400 (Bad Request):
